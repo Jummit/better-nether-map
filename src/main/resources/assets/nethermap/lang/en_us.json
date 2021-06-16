@@ -1,0 +1,8 @@
+{
+    "text.autoconfig.nethermap.title": "Better Nether Map Config",
+    "text.autoconfig.nethermap.option.useMapCreationHeight": "Use Map Creation Height",
+    "text.autoconfig.nethermap.option.dimensions": "Dimensions",
+    "text.autoconfig.nethermap.option.DimensionEntry": "Dimension Entry",
+    "text.autoconfig.nethermap.option.DimensionEntry.dimension": "Dimension ID",
+    "text.autoconfig.nethermap.option.DimensionEntry.scanHeight": "Scan Height"
+}

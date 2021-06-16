@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "id": "nethermap",
+  "version": "${version}",
+  "name": "Better Nether Map",
+  "description": "Makes maps work better in the Nether and all other cave dimensions.",
+  "authors": [
+    "Jummit"
+  ],
+  "contact": {
+    "sources": "https://github.com/Jummit/better-nether-map",
+    "issues": "https://github.com/Jummit/better-nether-map/issues"
+  },
+  "license": "MIT",
+  "icon": "assets/nethermap/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "com.jummit.nethermap.NetherMap"
+    ],
+    "modmenu": [
+      "com.jummit.nethermap.config.NetherMapModMenuIntegration"
+    ]
+  },
+  "mixins": [
+    "nethermap.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=0.11.3",
+    "fabric": "*",
+    "minecraft": "1.17.x",
+    "java": ">=16"
+  }
+}

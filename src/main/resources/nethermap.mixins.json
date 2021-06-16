@@ -1,0 +1,14 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "com.jummit.nethermap.mixin",
+  "compatibilityLevel": "JAVA_16",
+  "mixins": [
+  ],
+  "client": [
+    "FilledMapMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
