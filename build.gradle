@@ -88,10 +88,12 @@ import net.fabricmc.loom.task.RemapJarTask
 import com.modrinth.minotaur.TaskModrinthUpload
 
 task publishModrinth (type: TaskModrinthUpload) {
-    token = "${modrinth_key}"
-    projectId = 'fdtm99de'
-    versionNumber = project.mod_version
-    uploadFile = remapJar
-    addGameVersion(project.minecraft_version)
-    addLoader('fabric')
+	if (project.findProperty('modrinth_key') != null) {
+        token = project.findProperty('modrinth_key')
+		projectId = 'fdtm99de'
+		versionNumber = project.mod_version
+		uploadFile = remapJar
+		addGameVersion(project.minecraft_version)
+		addLoader('fabric')
+	}
 }
