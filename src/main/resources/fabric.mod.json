@@ -26,11 +26,11 @@
     "nethermap.mixins.json"
   ],
   "depends": {
-    "fabricloader": ">=0.11.3",
+    "fabricloader": ">=0.11.6",
     "fabric": "*",
-    "minecraft": "1.17.x",
+    "minecraft": "1.16.5",
     "java": ">=16",
-    "modmenu": ">=2.0.2",
-    "cloth-config2": ">=5.0.34"
+    "modmenu": ">=1.16.9",
+    "cloth-config2": ">=4.11.26"
   }
 }

@@ -10,7 +10,6 @@ import net.minecraft.sound.SoundEvents;
 import net.minecraft.stat.Stats;
 import net.minecraft.util.Hand;
 import net.minecraft.util.TypedActionResult;
-import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 
 public class UseItemCallbackListener implements UseItemCallback {
@@ -22,13 +21,13 @@ public class UseItemCallbackListener implements UseItemCallback {
             if (world.isClient) {
                 return TypedActionResult.success(used);
             } else {
-                if (!player.abilities.creativeMode) {
+                if (!player.getAbilities().creativeMode) {
                     used.decrement(1);
                 }
 
                 player.incrementStat(Stats.USED.getOrCreateStat(used.getItem()));
                 player.world.playSoundFromEntity((PlayerEntity)null, player, SoundEvents.UI_CARTOGRAPHY_TABLE_TAKE_RESULT, player.getSoundCategory(), 1.0F, 1.0F);
-                ItemStack filledMap = FilledMapItem.createMap(world, MathHelper.floor(player.getX()), MathHelper.floor(player.getZ()), (byte)0, true, false);
+                ItemStack filledMap = FilledMapItem.createMap(world, player.getBlockX(), player.getBlockZ(), (byte)0, true, false);
                 CompoundTag tag = filledMap.getTag();
                 tag.putInt("yLevel", (int) player.getY());
                 filledMap.setTag(tag);
@@ -37,7 +36,7 @@ public class UseItemCallbackListener implements UseItemCallback {
                     player.setStackInHand(hand, filledMap);
                     return TypedActionResult.consume(filledMap);
                 } else {
-                    if (!player.inventory.insertStack(filledMap.copy())) {
+                    if (!player.getInventory().insertStack(filledMap.copy())) {
                         player.dropItem(filledMap, false);
                     }
 

@@ -79,16 +79,16 @@ public class FilledMapMixin {
 									for(int z = 0; z < i; ++z) {
 										int aa = world.getDimension().hasCeiling() ? scanHeight : worldChunk.sampleHeightmap(Heightmap.Type.WORLD_SURFACE, y + u, z + v) + 1;
 										BlockState blockState;
-										if (aa <= 1) {
+										if (aa <= world.getBottomY() + 1) {
 											blockState = Blocks.BEDROCK.getDefaultState();
 										} else {
 											do {
 												--aa;
 												mutable.set(chunkPos.getStartX() + y + u, aa, chunkPos.getStartZ() + z + v);
 												blockState = worldChunk.getBlockState(mutable);
-											} while(blockState.getTopMaterialColor(world, mutable) == MaterialColor.CLEAR && aa > 0);
+											} while(blockState.getTopMaterialColor(world, mutable) == MaterialColor.CLEAR && aa > world.getBottomY());
 											
-											if (aa > 0 && !blockState.getFluidState().isEmpty()) {
+											if (aa > world.getBottomY() && !blockState.getFluidState().isEmpty()) {
 												int ab = aa - 1;
 												mutable2.set(mutable);
 												
@@ -97,7 +97,7 @@ public class FilledMapMixin {
 													mutable2.setY(ab--);
 													blockState2 = worldChunk.getBlockState(mutable2);
 													++w;
-												} while(ab > 0 && !blockState2.getFluidState().isEmpty());
+												} while(ab > world.getBottomY() && !blockState2.getFluidState().isEmpty());
 												
 												FluidState fluidState = blockState.getFluidState();
 												blockState = !fluidState.isEmpty() && !blockState.isSideSolidFullSquare(world, mutable, Direction.UP) ? fluidState.getBlockState() : blockState;
@@ -121,8 +121,8 @@ public class FilledMapMixin {
 									ac = 0;
 								}
 								
-								MaterialColor materialColor = (MaterialColor)Iterables.getFirst(Multisets.copyHighestCountFirst(multiset), MaterialColor.CLEAR);
-								if (materialColor == MaterialColor.WATER) {
+								MaterialColor mapColor = (MaterialColor)Iterables.getFirst(Multisets.copyHighestCountFirst(multiset), MaterialColor.CLEAR);
+								if (mapColor == MaterialColor.WATER) {
 									f = (double)w * 0.1D + (double)(o + p & 1) * 0.2D;
 									ac = 1;
 									if (f < 0.5D) {
@@ -136,13 +136,7 @@ public class FilledMapMixin {
 								
 								d = e;
 								if (p >= 0 && q * q + r * r < n * n && (!bl2 || (o + p & 1) != 0)) {
-									byte b = state.colors[o + p * 128];
-									byte c = (byte)(materialColor.id * 4 + ac);
-									if (b != c) {
-										state.colors[o + p * 128] = c;
-										state.markDirty(o, p);
-										bl = true;
-									}
+									bl |= state.putColor(o, p, (byte)(mapColor.id * 4 + ac));
 								}
 							}
 						}
