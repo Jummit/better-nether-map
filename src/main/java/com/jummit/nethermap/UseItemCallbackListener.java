@@ -17,29 +17,30 @@ public class UseItemCallbackListener implements UseItemCallback {
 	public TypedActionResult<ItemStack> interact(PlayerEntity player, World world, Hand hand) {
         ItemStack used = player.getStackInHand(hand);
         
-        if (!world.isClient && used.getItem() instanceof EmptyMapItem) {
-            ItemStack itemStack = player.getStackInHand(hand);
+        if (used.getItem() instanceof EmptyMapItem) {
             if (world.isClient) {
-                return TypedActionResult.success(itemStack);
+                return TypedActionResult.success(used);
             } else {
                 if (!player.getAbilities().creativeMode) {
-                    itemStack.decrement(1);
+                    used.decrement(1);
                 }
 
-                player.incrementStat(Stats.USED.getOrCreateStat(itemStack.getItem()));
+                player.incrementStat(Stats.USED.getOrCreateStat(used.getItem()));
                 player.world.playSoundFromEntity((PlayerEntity)null, player, SoundEvents.UI_CARTOGRAPHY_TABLE_TAKE_RESULT, player.getSoundCategory(), 1.0F, 1.0F);
                 ItemStack filledMap = FilledMapItem.createMap(world, player.getBlockX(), player.getBlockZ(), (byte)0, true, false);
                 NbtCompound tag = filledMap.getTag();
                 tag.putInt("yLevel", (int) player.getY());
                 filledMap.setTag(tag);
-                if (itemStack.isEmpty()) {
+                if (used.isEmpty()) {
+                    // For some reason fabric's mixin breaks consuming items, so doing it manually here.
+                    player.setStackInHand(hand, filledMap);
                     return TypedActionResult.consume(filledMap);
                 } else {
                     if (!player.getInventory().insertStack(filledMap.copy())) {
-                    player.dropItem(filledMap, false);
+                        player.dropItem(filledMap, false);
                     }
 
-                    return TypedActionResult.consume(itemStack);
+                    return TypedActionResult.consume(used);
                 }
             }
         }
