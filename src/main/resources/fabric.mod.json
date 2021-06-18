@@ -30,7 +30,9 @@
     "fabric": "*",
     "minecraft": "1.16.5",
     "java": ">=8",
-    "modmenu": ">=1.16.9",
     "cloth-config2": ">=4.11.26"
+  },
+  "suggests": {
+    "modmenu": ">=1.16.9"
   }
 }
