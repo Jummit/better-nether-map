@@ -11,7 +11,6 @@ import net.minecraft.item.FilledMapItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.map.MapState;
 import net.minecraft.server.network.ServerPlayerEntity;
-import net.minecraft.util.Hand;
 import net.minecraft.world.World;
 
 @Config(name = "nethermap")
@@ -26,8 +25,9 @@ public class NetherMapConfig implements ConfigData {
 
     public int getDimensionScanHeight(World world, Entity entity, MapState state) {
         if (useMapCreationHeight) {
-            for (Hand hand : Hand.values()) {
-                ItemStack item = ((ServerPlayerEntity) entity).getStackInHand(hand);
+            ServerPlayerEntity player = (ServerPlayerEntity)(entity);
+            for (int slot = 0; slot < player.inventory.size(); slot++) {
+                ItemStack item = player.inventory.getStack(slot);
                 if (item.getItem() instanceof FilledMapItem && FilledMapItem.getOrCreateMapState(item, entity.world) == state) {
                     return item.getTag().getInt("yLevel");
                 }
