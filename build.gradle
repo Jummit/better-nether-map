@@ -84,7 +84,6 @@ publishing {
 	}
 }
 
-import net.fabricmc.loom.task.RemapJarTask
 import com.modrinth.minotaur.TaskModrinthUpload
 
 task publishModrinth (type: TaskModrinthUpload) {
