@@ -26,8 +26,9 @@ public class NetherMapConfig implements ConfigData {
 
     public int getDimensionScanHeight(World world, Entity entity, MapState state) {
         if (useMapCreationHeight) {
-            for (Hand hand : Hand.values()) {
-                ItemStack item = ((ServerPlayerEntity) entity).getStackInHand(hand);
+            ServerPlayerEntity player = (ServerPlayerEntity)(entity);
+            for (int slot = 0; slot < player.getInventory().size(); slot++) {
+                ItemStack item = player.getInventory().getStack(slot);
                 if (item.getItem() instanceof FilledMapItem && FilledMapItem.getOrCreateMapState(item, entity.world) == state) {
                     return item.getTag().getInt("yLevel");
                 }
