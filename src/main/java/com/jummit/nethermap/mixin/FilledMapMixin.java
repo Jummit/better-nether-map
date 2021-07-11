@@ -26,14 +26,9 @@ import net.minecraft.world.Heightmap;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.WorldChunk;
 
-
 @Mixin(FilledMapItem.class)
 public class FilledMapMixin {
 	@Overwrite
-	// @Inject(method =
-	// "updateColors(Lnet/minecraft/server/world/ServerWorld;Lnet/minecraft/entity/Entity;Lnet/minecraft/item/map/MapState;)V",
-	// at = @At(value = "INVOKE", target =
-	// "Lnet/minecraft/item/map/MapState;putColor(IIB)Z", shift = At.Shift.AFTER))
 	public void updateColors(World world, Entity entity, MapState state) {
 		int scanHeight = AutoConfig.getConfigHolder(NetherMapConfig.class).getConfig().getDimensionScanHeight(world, entity, state);
 		if (world.getRegistryKey() == state.dimension && entity instanceof PlayerEntity) {

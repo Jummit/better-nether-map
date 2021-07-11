@@ -4,8 +4,6 @@
   "package": "com.jummit.nethermap.mixin",
   "compatibilityLevel": "JAVA_16",
   "mixins": [
-  ],
-  "client": [
     "FilledMapMixin"
   ],
   "injectors": {

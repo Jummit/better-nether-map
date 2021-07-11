@@ -28,9 +28,9 @@ public class UseItemCallbackListener implements UseItemCallback {
                 player.incrementStat(Stats.USED.getOrCreateStat(used.getItem()));
                 player.world.playSoundFromEntity((PlayerEntity)null, player, SoundEvents.UI_CARTOGRAPHY_TABLE_TAKE_RESULT, player.getSoundCategory(), 1.0F, 1.0F);
                 ItemStack filledMap = FilledMapItem.createMap(world, player.getBlockX(), player.getBlockZ(), (byte)0, true, false);
-                NbtCompound tag = filledMap.getTag();
+                NbtCompound tag = filledMap.getNbt();
                 tag.putInt("yLevel", (int) player.getY());
-                filledMap.setTag(tag);
+                filledMap.setNbt(tag);
                 if (used.isEmpty()) {
                     // For some reason fabric's mixin breaks consuming items, so doing it manually here.
                     player.setStackInHand(hand, filledMap);

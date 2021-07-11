@@ -11,7 +11,6 @@ import net.minecraft.item.FilledMapItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.map.MapState;
 import net.minecraft.server.network.ServerPlayerEntity;
-import net.minecraft.util.Hand;
 import net.minecraft.world.World;
 
 @Config(name = "nethermap")
@@ -30,7 +29,7 @@ public class NetherMapConfig implements ConfigData {
             for (int slot = 0; slot < player.getInventory().size(); slot++) {
                 ItemStack item = player.getInventory().getStack(slot);
                 if (item.getItem() instanceof FilledMapItem && FilledMapItem.getOrCreateMapState(item, entity.world) == state) {
-                    return item.getTag().getInt("yLevel");
+                    return item.getNbt().getInt("yLevel");
                 }
             }
         } else {
