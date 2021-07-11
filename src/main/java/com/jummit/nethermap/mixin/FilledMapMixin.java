@@ -12,7 +12,7 @@ import org.spongepowered.asm.mixin.Overwrite;
 import me.shedaniel.autoconfig.AutoConfig;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
-import net.minecraft.block.MaterialColor;
+import net.minecraft.block.MapColor;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.fluid.FluidState;
@@ -30,16 +30,12 @@ import net.minecraft.world.chunk.WorldChunk;
 @Mixin(FilledMapItem.class)
 public class FilledMapMixin {
 	@Overwrite
-	// @Inject(method =
-	// "updateColors(Lnet/minecraft/server/world/ServerWorld;Lnet/minecraft/entity/Entity;Lnet/minecraft/item/map/MapState;)V",
-	// at = @At(value = "INVOKE", target =
-	// "Lnet/minecraft/item/map/MapState;putColor(IIB)Z", shift = At.Shift.AFTER))
 	public void updateColors(World world, Entity entity, MapState state) {
 		int scanHeight = AutoConfig.getConfigHolder(NetherMapConfig.class).getConfig().getDimensionScanHeight(world, entity, state);
 		if (world.getRegistryKey() == state.dimension && entity instanceof PlayerEntity) {
 			int i = 1 << state.scale;
-			int j = state.xCenter;
-			int k = state.zCenter;
+			int j = state.centerX;
+			int k = state.centerZ;
 			int l = MathHelper.floor(entity.getX() - (double)j) / i + 64;
 			int m = MathHelper.floor(entity.getZ() - (double)k) / i + 64;
 			int n = 128 / i;
@@ -63,7 +59,7 @@ public class FilledMapMixin {
 							boolean bl2 = q * q + r * r > (n - 2) * (n - 2);
 							int s = (j / i + o - 64) * i;
 							int t = (k / i + p - 64) * i;
-							Multiset<MaterialColor> multiset = LinkedHashMultiset.create();
+							Multiset<MapColor> multiset = LinkedHashMultiset.create();
 							WorldChunk worldChunk = world.getWorldChunk(new BlockPos(s, 0, t));
 							if (!worldChunk.isEmpty()) {
 								ChunkPos chunkPos = worldChunk.getPos();
@@ -86,7 +82,7 @@ public class FilledMapMixin {
 												--aa;
 												mutable.set(chunkPos.getStartX() + y + u, aa, chunkPos.getStartZ() + z + v);
 												blockState = worldChunk.getBlockState(mutable);
-											} while(blockState.getTopMaterialColor(world, mutable) == MaterialColor.CLEAR && aa > 0);
+											} while(blockState.getTopMaterialColor(world, mutable) == MapColor.CLEAR && aa > 0);
 											
 											if (aa > 0 && !blockState.getFluidState().isEmpty()) {
 												int ab = aa - 1;
@@ -121,8 +117,8 @@ public class FilledMapMixin {
 									ac = 0;
 								}
 								
-								MaterialColor materialColor = (MaterialColor)Iterables.getFirst(Multisets.copyHighestCountFirst(multiset), MaterialColor.CLEAR);
-								if (materialColor == MaterialColor.WATER) {
+								MapColor mapColor = (MapColor)Iterables.getFirst(Multisets.copyHighestCountFirst(multiset), MapColor.CLEAR);
+								if (mapColor == MapColor.WATER_BLUE) {
 									f = (double)w * 0.1D + (double)(o + p & 1) * 0.2D;
 									ac = 1;
 									if (f < 0.5D) {
@@ -137,7 +133,7 @@ public class FilledMapMixin {
 								d = e;
 								if (p >= 0 && q * q + r * r < n * n && (!bl2 || (o + p & 1) != 0)) {
 									byte b = state.colors[o + p * 128];
-									byte c = (byte)(materialColor.id * 4 + ac);
+									byte c = (byte)(mapColor.id * 4 + ac);
 									if (b != c) {
 										state.colors[o + p * 128] = c;
 										state.markDirty(o, p);

@@ -14,6 +14,7 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 
 public class UseItemCallbackListener implements UseItemCallback {
+    
 	@Override
 	public TypedActionResult<ItemStack> interact(PlayerEntity player, World world, Hand hand) {
         ItemStack used = player.getStackInHand(hand);

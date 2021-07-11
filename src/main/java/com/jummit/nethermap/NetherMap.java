@@ -8,6 +8,7 @@ import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.event.player.UseItemCallback;
 
 public class NetherMap implements ModInitializer {
+	
 	@Override
 	public void onInitialize() {
 		UseItemCallback.EVENT.register(new UseItemCallbackListener());
