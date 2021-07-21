@@ -5,7 +5,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.EmptyMapItem;
 import net.minecraft.item.FilledMapItem;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.NbtCompound;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.stat.Stats;
 import net.minecraft.util.Hand;
@@ -30,7 +30,7 @@ public class UseItemCallbackListener implements UseItemCallback {
                 player.incrementStat(Stats.USED.getOrCreateStat(used.getItem()));
                 player.world.playSoundFromEntity((PlayerEntity)null, player, SoundEvents.UI_CARTOGRAPHY_TABLE_TAKE_RESULT, player.getSoundCategory(), 1.0F, 1.0F);
                 ItemStack filledMap = FilledMapItem.createMap(world, MathHelper.floor(player.getX()), MathHelper.floor(player.getZ()), (byte)0, true, false);
-                CompoundTag tag = filledMap.getTag();
+                NbtCompound tag = filledMap.getTag();
                 tag.putInt("yLevel", (int) player.getY());
                 filledMap.setTag(tag);
                 if (used.isEmpty()) {
