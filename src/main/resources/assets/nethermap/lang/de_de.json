@@ -1,0 +1,10 @@
+{
+    "text.autoconfig.nethermap.title": "Bessere Nether-Karte Konfiguration",
+    "text.autoconfig.nethermap.option.useMapCreationHeight": "Benutze die Höhe bei der Erstellung der Karte",
+    "text.autoconfig.nethermap.option.dimensions": "Dimensionen",
+    "text.autoconfig.nethermap.option.DimensionEntry": "Dimensionseintrag",
+    "text.autoconfig.nethermap.option.DimensionEntry.dimension": "Dimensions-ID",
+    "text.autoconfig.nethermap.option.DimensionEntry.scanHeight": "Scanhöhe",
+    "modmenu.descriptionTranslation.nethermap": "Macht das Karten besser im Nether und anderen Höhlendimensionen funktionieren.",
+    "modmenu.summaryTranslation.nethermap": "Bessere Karten von Höhlendimensionen"
+}

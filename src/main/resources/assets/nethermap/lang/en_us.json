@@ -4,5 +4,7 @@
     "text.autoconfig.nethermap.option.dimensions": "Dimensions",
     "text.autoconfig.nethermap.option.DimensionEntry": "Dimension Entry",
     "text.autoconfig.nethermap.option.DimensionEntry.dimension": "Dimension ID",
-    "text.autoconfig.nethermap.option.DimensionEntry.scanHeight": "Scan Height"
+    "text.autoconfig.nethermap.option.DimensionEntry.scanHeight": "Scan Height",
+    "modmenu.descriptionTranslation.nethermap": "Makes maps work better in the Nether and all other cave dimensions.",
+    "modmenu.summaryTranslation.nethermap": "Improve cave dimension maps"
 }
