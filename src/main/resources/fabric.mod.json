@@ -8,8 +8,9 @@
     "Jummit"
   ],
   "contact": {
-    "sources": "https://github.com/Jummit/better-nether-map",
-    "issues": "https://github.com/Jummit/better-nether-map/issues"
+    "homepage": "https://modrinth.com/mod/better-nether-map",
+    "issues": "https://github.com/Jummit/better-nether-map/issues",
+    "sources": "https://github.com/Jummit/better-nether-map"
   },
   "license": "MIT",
   "icon": "assets/nethermap/icon.png",
@@ -33,6 +34,7 @@
     "cloth-config2": ">=5.0.34"
   },
   "suggests": {
-    "modmenu": ">=2.0.2"
+    "modmenu": ">=2.0.2",
+    "crowmap": "*"
   }
 }
