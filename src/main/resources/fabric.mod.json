@@ -29,9 +29,12 @@
   "depends": {
     "fabricloader": ">=0.12.1",
     "fabric": "*",
-    "minecraft": "1.18-alpha.21.40.a",
+    "minecraft": "1.18.*",
     "java": ">=16",
     "cloth-config2": ">=6.0.39"
+  },
+  "breaks": {
+    "servercore": "*"
   },
   "suggests": {
     "modmenu": ">=3.0.0",
