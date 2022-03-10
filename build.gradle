@@ -89,7 +89,7 @@ modrinth {
 	token = System.getenv("MODRINTH_TOKEN")
 	projectId = "fdtm99de"
 	versionNumber = project.mod_version
-	uploadFile = jar
+	uploadFile = remapJar
 	gameVersions = [project.minecraft_version]
 	loaders = ["fabric"]
 	dependencies = [
