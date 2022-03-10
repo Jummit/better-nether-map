@@ -89,15 +89,15 @@ publishing {
 	}
 }
 
-import com.modrinth.minotaur.TaskModrinthUpload
-
-task publishModrinth (type: TaskModrinthUpload) {
-	if (project.findProperty('modrinth_key') != null) {
-        token = project.findProperty('modrinth_key')
-		projectId = 'fdtm99de'
-		versionNumber = project.mod_version
-		uploadFile = remapJar
-		addGameVersion(project.minecraft_version)
-		addLoader('fabric')
-	}
+import com.modrinth.minotaur.dependencies.ModDependency
+modrinth {
+	token = System.getenv("MODRINTH_TOKEN")
+	projectId = "fdtm99de"
+	versionNumber = project.mod_version
+	uploadFile = remapJar
+	gameVersions = [project.minecraft_version]
+	loaders = ["fabric"]
+	dependencies = [
+		new ModDependency("P7dR8mSH", "required")
+	]
 }
