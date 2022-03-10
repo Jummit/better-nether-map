@@ -1,7 +1,7 @@
 plugins {
 	id 'fabric-loom' version '0.8-SNAPSHOT'
 	id 'maven-publish'
-	id "com.modrinth.minotaur" version "1.1.0"
+	id "com.modrinth.minotaur" version "2.+"
 }
 
 sourceCompatibility = JavaVersion.VERSION_16
@@ -84,15 +84,15 @@ publishing {
 	}
 }
 
-import com.modrinth.minotaur.TaskModrinthUpload
-
-task publishModrinth (type: TaskModrinthUpload) {
-	if (project.findProperty('modrinth_key') != null) {
-        token = project.findProperty('modrinth_key')
-		projectId = 'fdtm99de'
-		versionNumber = project.mod_version
-		uploadFile = remapJar
-		addGameVersion(project.minecraft_version)
-		addLoader('fabric')
-	}
+import com.modrinth.minotaur.dependencies.ModDependency
+modrinth {
+	token = System.getenv("MODRINTH_TOKEN")
+	projectId = "fdtm99de"
+	versionNumber = project.mod_version
+	uploadFile = jar
+	gameVersions = [project.minecraft_version]
+	loaders = ["fabric"]
+	dependencies = [
+		new ModDependency("P7dR8mSH", "required")
+	]
 }
