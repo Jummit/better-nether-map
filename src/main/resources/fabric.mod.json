@@ -27,14 +27,14 @@
     "nethermap.mixins.json"
   ],
   "depends": {
-    "fabricloader": ">=0.12.1",
+    "fabricloader": ">=0.14.9",
     "fabric": "*",
-    "minecraft": "1.18.*",
+    "minecraft": "1.19.*",
     "java": ">=16",
-    "cloth-config2": ">=6.0.39"
+    "cloth-config2": ">=8.0.75"
   },
   "suggests": {
-    "modmenu": ">=3.0.0",
+    "modmenu": ">=4.0.0",
     "crowmap": "*"
   }
 }
