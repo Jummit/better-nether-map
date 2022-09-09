@@ -35,6 +35,7 @@
   },
   "suggests": {
     "modmenu": ">=4.0.0",
-    "crowmap": "*"
+    "crowmap": "*",
+    "map_atlases": "*"
   }
 }
