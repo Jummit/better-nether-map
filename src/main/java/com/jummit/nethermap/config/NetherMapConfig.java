@@ -10,6 +10,7 @@ import net.minecraft.item.map.MapState;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.world.World;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
@@ -17,7 +18,7 @@ import java.util.Objects;
 public class NetherMapConfig implements ConfigData {
 
     public boolean useMapCreationHeight = true;
-    public List<DimensionEntry> dimensions = List.of(new DimensionEntry("minecraft:nether", 40));
+    public List<DimensionEntry> dimensions = Arrays.asList(new DimensionEntry("minecraft:nether", 40));
 
     public static NetherMapConfig getInstance() {
         return AutoConfig.getConfigHolder(NetherMapConfig.class).getConfig();
