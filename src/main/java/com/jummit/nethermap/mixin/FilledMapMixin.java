@@ -20,10 +20,10 @@ public class FilledMapMixin {
 	@Redirect(method = "updateColors", at = @At(
 			value = "INVOKE",
 			target = "Lnet/minecraft/world/dimension/DimensionType;hasCeiling()Z"))
-	/**
-	 * Make every dimension have a sky, which makes maps show the surface.
-	 *
-	 * @see FilledMapItem#updateColors(World world, Entity entity, MapState state)
+	/*
+	  Make every dimension have a sky, which makes maps show the surface.
+
+	  @see FilledMapItem#updateColors(World world, Entity entity, MapState state)
 	 */
     public boolean hasCeiling(DimensionType type) {
 		return false;
@@ -32,8 +32,8 @@ public class FilledMapMixin {
 	@Redirect(method = "updateColors", at = @At(
 			value = "INVOKE",
 			target = "Lnet/minecraft/world/chunk/WorldChunk;sampleHeightmap(Lnet/minecraft/world/Heightmap$Type;II)I"))
-	/**
-	 * Change the height at which the map starts to scan for blocks.
+	/*
+	  Change the height at which the map starts to scan for blocks.
 	 */
 	public int sampleHeightmap(WorldChunk chunk, Heightmap.Type type, int x, int z, World world, Entity entity, MapState state) {
 		int scanHeight = AutoConfig.getConfigHolder(NetherMapConfig.class).getConfig().getDimensionScanHeight(world, entity, state);

@@ -26,9 +26,10 @@ public class UseItemCallbackListener implements UseItemCallback {
                 }
 
                 player.incrementStat(Stats.USED.getOrCreateStat(used.getItem()));
-                player.world.playSoundFromEntity((PlayerEntity)null, player, SoundEvents.UI_CARTOGRAPHY_TABLE_TAKE_RESULT, player.getSoundCategory(), 1.0F, 1.0F);
+                player.getWorld().playSoundFromEntity(null, player, SoundEvents.UI_CARTOGRAPHY_TABLE_TAKE_RESULT, player.getSoundCategory(), 1.0F, 1.0F);
                 ItemStack filledMap = FilledMapItem.createMap(world, player.getBlockX(), player.getBlockZ(), (byte)0, true, false);
                 NbtCompound tag = filledMap.getNbt();
+                assert tag != null;
                 tag.putInt("yLevel", (int) player.getY());
                 filledMap.setNbt(tag);
                 if (used.isEmpty()) {

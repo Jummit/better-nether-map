@@ -1,8 +1,5 @@
 package com.jummit.nethermap.config;
 
-import java.util.Arrays;
-import java.util.List;
-
 import me.shedaniel.autoconfig.AutoConfig;
 import me.shedaniel.autoconfig.ConfigData;
 import me.shedaniel.autoconfig.annotation.Config;
@@ -13,11 +10,14 @@ import net.minecraft.item.map.MapState;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.world.World;
 
+import java.util.List;
+import java.util.Objects;
+
 @Config(name = "nethermap")
 public class NetherMapConfig implements ConfigData {
 
     public boolean useMapCreationHeight = true;
-    public List<DimensionEntry> dimensions = Arrays.asList(new DimensionEntry("minecraft:nether", 40));
+    public List<DimensionEntry> dimensions = List.of(new DimensionEntry("minecraft:nether", 40));
 
     public static NetherMapConfig getInstance() {
         return AutoConfig.getConfigHolder(NetherMapConfig.class).getConfig();
@@ -28,8 +28,8 @@ public class NetherMapConfig implements ConfigData {
             ServerPlayerEntity player = (ServerPlayerEntity)(entity);
             for (int slot = 0; slot < player.getInventory().size(); slot++) {
                 ItemStack item = player.getInventory().getStack(slot);
-                if (item.getItem() instanceof FilledMapItem && FilledMapItem.getOrCreateMapState(item, entity.world) == state) {
-                    return item.getNbt().getInt("yLevel");
+                if (item.getItem() instanceof FilledMapItem && FilledMapItem.getMapState(item, entity.getWorld()) == state) {
+                    return Objects.requireNonNull(item.getNbt()).getInt("yLevel");
                 }
             }
         } else {
