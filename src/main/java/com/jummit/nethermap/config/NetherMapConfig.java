@@ -28,7 +28,7 @@ public class NetherMapConfig implements ConfigData {
             ServerPlayerEntity player = (ServerPlayerEntity)(entity);
             for (int slot = 0; slot < player.getInventory().size(); slot++) {
                 ItemStack item = player.getInventory().getStack(slot);
-                if (item.getItem() instanceof FilledMapItem && FilledMapItem.getOrCreateMapState(item, entity.world) == state) {
+                if (item.getItem() instanceof FilledMapItem && FilledMapItem.getMapState(item, entity.world) == state) {
                     return item.getNbt().getInt("yLevel");
                 }
             }
