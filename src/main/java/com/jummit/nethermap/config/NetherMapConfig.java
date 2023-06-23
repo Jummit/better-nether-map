@@ -18,7 +18,7 @@ import java.util.Objects;
 public class NetherMapConfig implements ConfigData {
 
     public boolean useMapCreationHeight = true;
-    public List<DimensionEntry> dimensions = Arrays.asList(new DimensionEntry("minecraft:nether", 40));
+    public List<DimensionEntry> dimensions = Arrays.asList(new DimensionEntry("minecraft:the_nether", 40));
 
     public static NetherMapConfig getInstance() {
         return AutoConfig.getConfigHolder(NetherMapConfig.class).getConfig();
