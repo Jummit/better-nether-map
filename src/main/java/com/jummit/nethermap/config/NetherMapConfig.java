@@ -1,61 +1,76 @@
 package com.jummit.nethermap.config;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+import com.jummit.nethermap.Height;
+import com.jummit.nethermap.CreationHeight;
+import com.jummit.nethermap.FixedHeight;
+import com.jummit.nethermap.HeightmapHeight;
+
 import me.shedaniel.autoconfig.AutoConfig;
 import me.shedaniel.autoconfig.ConfigData;
 import me.shedaniel.autoconfig.annotation.Config;
+import me.shedaniel.autoconfig.annotation.ConfigEntry;
 import net.minecraft.entity.Entity;
-import net.minecraft.item.FilledMapItem;
-import net.minecraft.item.ItemStack;
 import net.minecraft.item.map.MapState;
-import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.world.World;
-
-import java.util.Arrays;
-import java.util.List;
-import java.util.Objects;
+import net.minecraft.world.chunk.WorldChunk;
 
 @Config(name = "nethermap")
 public class NetherMapConfig implements ConfigData {
 
+    @ConfigEntry.Gui.Tooltip()
     public boolean useMapCreationHeight = true;
-    public List<DimensionEntry> dimensions = Arrays.asList(new DimensionEntry("minecraft:the_nether", 40));
+    @ConfigEntry.Gui.Tooltip()
+    public int fixedHeight = 100;
+    @ConfigEntry.Gui.Tooltip()
+    public List<FixedEntry> fixedEntries = Arrays.asList(new FixedEntry("minecraft:the_nether", 40));
+    @ConfigEntry.Gui.Tooltip()
+    public List<String> creationHeightEntries = new ArrayList<String>();
 
     public static NetherMapConfig getInstance() {
         return AutoConfig.getConfigHolder(NetherMapConfig.class).getConfig();
     }
 
-    public int getDimensionScanHeight(World world, Entity entity, MapState state) {
-        if (useMapCreationHeight) {
-            ServerPlayerEntity player = (ServerPlayerEntity)(entity);
-            for (int slot = 0; slot < player.getInventory().size(); slot++) {
-                ItemStack item = player.getInventory().getStack(slot);
-                if (item.getItem() instanceof FilledMapItem && FilledMapItem.getMapState(item, entity.getWorld()) == state) {
-                    return Objects.requireNonNull(item.getNbt()).getInt("yLevel");
-                }
+    public Height getHeightFor(WorldChunk chunk, int x, int z, World world, Entity entity, MapState state) {
+        String dimension = world.getRegistryKey().getValue().toString();
+        Height heightmapHeight = new HeightmapHeight(chunk, x, z);
+        Height creationHeight = new CreationHeight(world, entity, state, heightmapHeight);
+        for (FixedEntry entry : fixedEntries) {
+            if (entry.dimension.equals(dimension)) {
+                return new FixedHeight(entry.height);
             }
-        } else {
-            for (DimensionEntry dimensionEntry : dimensions) {
-                if (dimensionEntry.dimension.equals(world.getRegistryKey().getValue().toString())) {
-                    return dimensionEntry.scanHeight;
-                }
+        };
+        for (String entry : creationHeightEntries) {
+            if (entry.equals(dimension)) {
+                return creationHeight;
             }
+        };
+        if (!world.getDimension().hasCeiling()) {
+            return heightmapHeight;
         }
-        return 100;
-    }
+        if (useMapCreationHeight) {
+            return creationHeight;
+        } else {
+            return new FixedHeight(fixedHeight);
+        }
+    };
 }
 
-class DimensionEntry {
+class FixedEntry {
     
     String dimension;
-    int scanHeight;
+    int height;
 
-    public DimensionEntry() {
+    public FixedEntry() {
         dimension = "";
-        scanHeight = 100;
+        height = 100;
     }
 
-    public DimensionEntry(String dimension, int scanHeight) {
+    public FixedEntry(String dimension, int height) {
         this.dimension = dimension;
-        this.scanHeight = scanHeight;
+        this.height = height;
     }
 }

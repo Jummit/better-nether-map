@@ -1,10 +1,16 @@
 {
     "text.autoconfig.nethermap.title": "Bessere Nether-Karte Konfiguration",
-    "text.autoconfig.nethermap.option.useMapCreationHeight": "Benutze die Höhe bei der Erstellung der Karte",
-    "text.autoconfig.nethermap.option.dimensions": "Dimensionen",
-    "text.autoconfig.nethermap.option.DimensionEntry": "Dimensionseintrag",
-    "text.autoconfig.nethermap.option.DimensionEntry.dimension": "Dimensions-ID",
-    "text.autoconfig.nethermap.option.DimensionEntry.scanHeight": "Scanhöhe",
+    "text.autoconfig.nethermap.option.useMapCreationHeight": "Benutze Höhe beim Erstellen",
+    "text.autoconfig.nethermap.option.useMapCreationHeight.@Tooltip": "Benutzt die Höhe wo die Karte geöffnet wurde für Höhlendimensionen.",
+    "text.autoconfig.nethermap.option.fixedHeight": "Benutze Feste Höhe",
+    "text.autoconfig.nethermap.option.fixedHeight.@Tooltip": "Benutzt eine feste Höhe für Höhlendimensionen.",
+    "text.autoconfig.nethermap.option.creationHeightEntries": "Benutze Höhe beim Erstellen",
+    "text.autoconfig.nethermap.option.creationHeightEntries.@Tooltip": "Diese Liste überschreibt die Standardeinstellungen\nund kann alle Dimensionen enthalten.",
+    "text.autoconfig.nethermap.option.fixedEntries": "Benutze Feste Höhe",
+    "text.autoconfig.nethermap.option.fixedEntries.@Tooltip": "Diese Liste überschreibt die Standardeinstellungen\nund kann alle Dimensionen enthalten.",
+    "text.autoconfig.nethermap.option.FixedEntry": "Eintrag",
+    "text.autoconfig.nethermap.option.FixedEntry.dimension": "Dimensions-ID",
+    "text.autoconfig.nethermap.option.FixedEntry.scanHeight": "Höhe",
     "modmenu.descriptionTranslation.nethermap": "Macht das Karten besser im Nether und anderen Höhlendimensionen funktionieren.",
     "modmenu.summaryTranslation.nethermap": "Bessere Karten von Höhlendimensionen"
 }

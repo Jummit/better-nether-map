@@ -1,10 +1,16 @@
 {
     "text.autoconfig.nethermap.title": "Better Nether Map Config",
     "text.autoconfig.nethermap.option.useMapCreationHeight": "Use Map Creation Height",
-    "text.autoconfig.nethermap.option.dimensions": "Dimensions",
-    "text.autoconfig.nethermap.option.DimensionEntry": "Dimension Entry",
-    "text.autoconfig.nethermap.option.DimensionEntry.dimension": "Dimension ID",
-    "text.autoconfig.nethermap.option.DimensionEntry.scanHeight": "Scan Height",
+    "text.autoconfig.nethermap.option.useMapCreationHeight.@Tooltip": "Use the height where the map was created in cave dimensions.",
+    "text.autoconfig.nethermap.option.fixedHeight": "Use Fixed Height",
+    "text.autoconfig.nethermap.option.fixedHeight.@Tooltip": "Use a fixed height for cave dimensions.",
+    "text.autoconfig.nethermap.option.creationHeightEntries": "Use Creation Height",
+    "text.autoconfig.nethermap.option.creationHeightEntries.@Tooltip": "This list overrides the defaults, and can contain all dimensions.",
+    "text.autoconfig.nethermap.option.fixedEntries": "Use Fixed Height",
+    "text.autoconfig.nethermap.option.fixedEntries.@Tooltip": "This list overrides the defaults, and can contain all dimensions.",
+    "text.autoconfig.nethermap.option.FixedEntry": "Entry",
+    "text.autoconfig.nethermap.option.FixedEntry.dimension": "Dimension ID",
+    "text.autoconfig.nethermap.option.FixedEntry.height": "Height",
     "modmenu.descriptionTranslation.nethermap": "Makes maps work better in the Nether and all other cave dimensions.",
     "modmenu.summaryTranslation.nethermap": "Improve cave dimension maps"
 }

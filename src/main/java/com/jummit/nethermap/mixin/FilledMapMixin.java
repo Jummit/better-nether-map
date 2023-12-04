@@ -1,10 +1,10 @@
 package com.jummit.nethermap.mixin;
 
-import com.jummit.nethermap.config.NetherMapConfig;
-
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Redirect;
+
+import com.jummit.nethermap.config.NetherMapConfig;
 
 import me.shedaniel.autoconfig.AutoConfig;
 import net.minecraft.entity.Entity;
@@ -36,8 +36,9 @@ public class FilledMapMixin {
 	  Change the height at which the map starts to scan for blocks.
 	 */
 	public int sampleHeightmap(WorldChunk chunk, Heightmap.Type type, int x, int z, World world, Entity entity, MapState state) {
-		int scanHeight = AutoConfig.getConfigHolder(NetherMapConfig.class).getConfig().getDimensionScanHeight(world, entity, state);
-		return world.getDimension().hasCeiling() ? scanHeight : chunk.sampleHeightmap(Heightmap.Type.WORLD_SURFACE, x, z) + 1;
+		return AutoConfig.getConfigHolder(NetherMapConfig.class).get()
+				.getHeightFor(chunk, x, z, world, entity, state)
+				.get();
 	}
 
 }

@@ -2,9 +2,9 @@
     "text.autoconfig.nethermap.title": "Better Nether Map 设置",
     "text.autoconfig.nethermap.option.useMapCreationHeight": "使用地图创建高度",
     "text.autoconfig.nethermap.option.dimensions": "维度",
-    "text.autoconfig.nethermap.option.DimensionEntry": "维度条目",
-    "text.autoconfig.nethermap.option.DimensionEntry.dimension": "维度 ID",
-    "text.autoconfig.nethermap.option.DimensionEntry.scanHeight": "扫描高度",
+    "text.autoconfig.nethermap.option.FixedEntry": "维度条目",
+    "text.autoconfig.nethermap.option.FixedEntry.dimension": "维度 ID",
+    "text.autoconfig.nethermap.option.FixedEntry.scanHeight": "扫描高度",
     "modmenu.descriptionTranslation.nethermap": "使得地图在下界和所有其他洞穴维度中更好地工作。",
     "modmenu.summaryTranslation.nethermap": "改进洞穴维度的地图"
 }
