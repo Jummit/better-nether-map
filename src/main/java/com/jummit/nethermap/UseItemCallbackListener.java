@@ -1,6 +1,9 @@
 package com.jummit.nethermap;
 
 import net.fabricmc.fabric.api.event.player.UseItemCallback;
+import com.jummit.nethermap.NetherMap;
+import net.minecraft.component.ComponentMap;
+import net.minecraft.component.Component;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.EmptyMapItem;
 import net.minecraft.item.FilledMapItem;
@@ -28,10 +31,7 @@ public class UseItemCallbackListener implements UseItemCallback {
                 player.incrementStat(Stats.USED.getOrCreateStat(used.getItem()));
                 player.getWorld().playSoundFromEntity(null, player, SoundEvents.UI_CARTOGRAPHY_TABLE_TAKE_RESULT, player.getSoundCategory(), 1.0F, 1.0F);
                 ItemStack filledMap = FilledMapItem.createMap(world, player.getBlockX(), player.getBlockZ(), (byte)0, true, false);
-                NbtCompound tag = filledMap.getNbt();
-                assert tag != null;
-                tag.putInt("yLevel", (int) player.getY());
-                filledMap.setNbt(tag);
+                filledMap.applyComponentsFrom(ComponentMap.builder().add(NetherMap.MAP_HEIGHT, (int) player.getY()).build());
                 if (used.isEmpty()) {
                     // For some reason fabric's mixin breaks consuming items, so doing it manually here.
                     player.setStackInHand(hand, filledMap);

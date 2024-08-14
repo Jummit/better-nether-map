@@ -2,6 +2,9 @@ package com.jummit.nethermap;
 
 import java.util.Objects;
 
+import com.mojang.serialization.MapDecoder;
+
+import net.minecraft.component.DataComponentTypes;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.FilledMapItem;
@@ -22,7 +25,7 @@ public class CreationHeight implements Height {
         for (int slot = 0; slot < player.getInventory().size(); slot++) {
         ItemStack item = player.getInventory().getStack(slot);
             if (item.getItem() instanceof FilledMapItem && FilledMapItem.getMapState(item, entity.getWorld()) == state) {
-                return Objects.requireNonNull(item.getNbt()).getInt("yLevel");
+                return (Integer) Objects.requireNonNull(item.getComponents()).getOrDefault(NetherMap.MAP_HEIGHT, 0);
             }
         }
         return fallback.get();
