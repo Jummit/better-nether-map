@@ -21,7 +21,6 @@ public class NetherMap implements ModInitializer {
 
 	@Override
 	public void onInitialize() {
-		UseItemCallback.EVENT.register(new UseItemCallbackListener());
 		Registry.register(Registries.DATA_COMPONENT_TYPE, Identifier.of("nethermap", "map_height"), MAP_HEIGHT);
 		AutoConfig.register(NetherMapConfig.class, Toml4jConfigSerializer::new);
 	}
