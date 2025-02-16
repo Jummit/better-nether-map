@@ -27,6 +27,9 @@ public class NetherMapConfig implements ConfigData {
     public List<FixedEntry> fixedEntries = List.of(new FixedEntry("minecraft:the_nether", 40));
     @ConfigEntry.Gui.Tooltip()
     public List<String> creationHeightEntries = new ArrayList<>();
+    @ConfigEntry.Gui.Tooltip()
+    @ConfigEntry.Gui.RequiresRestart()
+    public boolean enablePolymerSupport = false;
 
     public static NetherMapConfig getInstance() {
         return AutoConfig.getConfigHolder(NetherMapConfig.class).getConfig();
