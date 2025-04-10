@@ -12,7 +12,7 @@ import org.spongepowered.asm.mixin.injection.At;
 
 @Mixin(EmptyMapItem.class)
 public class EmptyMapItemMixin {
-    @ModifyExpressionValue(method = "use", at = @At(value = "INVOKE", target = "Lnet/minecraft/item/FilledMapItem;createMap(Lnet/minecraft/world/World;IIBZZ)Lnet/minecraft/item/ItemStack;"))
+    @ModifyExpressionValue(method = "use", at = @At(value = "INVOKE", target = "Lnet/minecraft/item/FilledMapItem;createMap(Lnet/minecraft/server/world/ServerWorld;IIBZZ)Lnet/minecraft/item/ItemStack;"))
     private ItemStack addHeightComponent(ItemStack original, @Local(argsOnly = true) PlayerEntity entity) {
         original.set(NetherMap.MAP_HEIGHT, (int) entity.getY());
         return original;
