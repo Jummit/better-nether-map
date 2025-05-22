@@ -1,0 +1,10 @@
+{
+    "text.autoconfig.nethermap.title": "Configuración de Better Nether Map",
+    "text.autoconfig.nethermap.option.useMapCreationHeight": "Usar altura de creación del mapa",
+    "text.autoconfig.nethermap.option.dimensions": "Dimensiones",
+    "text.autoconfig.nethermap.option.DimensionEntry": "Entrada de dimensión",
+    "text.autoconfig.nethermap.option.DimensionEntry.dimension": "ID de dimensión",
+    "text.autoconfig.nethermap.option.DimensionEntry.scanHeight": "Altura de escaneo",
+    "modmenu.descriptionTranslation.nethermap": "Hace que los mapas funcionen mejor en el Nether y en todas las demás dimensiones de cuevas.",
+    "modmenu.summaryTranslation.nethermap": "Mejora los mapas de dimensiones de cuevas"
+}
