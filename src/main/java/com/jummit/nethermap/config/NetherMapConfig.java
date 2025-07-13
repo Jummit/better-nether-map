@@ -28,6 +28,8 @@ public class NetherMapConfig implements ConfigData {
     @ConfigEntry.Gui.Tooltip()
     public List<String> creationHeightEntries = new ArrayList<>();
     @ConfigEntry.Gui.Tooltip()
+    public boolean disableSpinningIndicator = true;
+    @ConfigEntry.Gui.Tooltip()
     @ConfigEntry.Gui.RequiresRestart()
     public boolean enablePolymerSupport = false;
 

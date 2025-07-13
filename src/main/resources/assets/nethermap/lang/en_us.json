@@ -8,6 +8,8 @@
     "text.autoconfig.nethermap.option.creationHeightEntries.@Tooltip": "This list overrides the defaults, and can contain all dimensions.",
     "text.autoconfig.nethermap.option.fixedEntries": "Use Fixed Height",
     "text.autoconfig.nethermap.option.fixedEntries.@Tooltip": "This list overrides the defaults, and can contain all dimensions.",
+    "text.autoconfig.nethermap.option.disableSpinningIndicator": "Disable Spinning Indicator",
+    "text.autoconfig.nethermap.option.disableSpinningIndicator.@Tooltip": "Disables the spinning of the player indicator in the nether.",
     "text.autoconfig.nethermap.option.enablePolymerSupport": "Enable Polymer Support",
     "text.autoconfig.nethermap.option.enablePolymerSupport.@Tooltip": "This option enables support of vanilla clients via Polymer.\nRequires a restart to apply.",
     "text.autoconfig.nethermap.option.FixedEntry": "Entry",
