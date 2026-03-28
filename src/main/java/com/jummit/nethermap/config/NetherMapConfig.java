@@ -10,11 +10,12 @@ import me.shedaniel.autoconfig.AutoConfig;
 import me.shedaniel.autoconfig.ConfigData;
 import me.shedaniel.autoconfig.annotation.Config;
 import me.shedaniel.autoconfig.annotation.ConfigEntry;
-import net.minecraft.component.DataComponentTypes;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.map.MapState;
-import net.minecraft.world.World;
+import net.minecraft.core.component.DataComponents;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.saveddata.maps.MapItemSavedData;
+
 
 @Config(name = "nethermap")
 public class NetherMapConfig implements ConfigData {
@@ -35,8 +36,8 @@ public class NetherMapConfig implements ConfigData {
         return AutoConfig.getConfigHolder(NetherMapConfig.class).getConfig();
     }
 
-    public HeightGetter getHeightFor(World world, Entity entity, MapState state) {
-        var dimension = world.getRegistryKey().getValue().toString();
+    public HeightGetter getHeightFor(Level world, Entity entity, MapItemSavedData state) {
+        var dimension = world.dimension().identifier().toString();
         for (var entry : fixedEntries) {
             if (entry.dimension.equals(dimension)) {
                 return new HeightGetter.Fixed(entry.height);
@@ -49,7 +50,7 @@ public class NetherMapConfig implements ConfigData {
             }
         }
 
-        if (!world.getDimension().hasCeiling()) {
+        if (!world.dimensionType().hasCeiling()) {
             return HeightGetter.PASSTHROUGH;
         }
 
@@ -60,17 +61,17 @@ public class NetherMapConfig implements ConfigData {
         }
     }
 
-    private HeightGetter getCreationHeight(Entity entity, MapState state) {
-        if (entity instanceof PlayerEntity player) {
-            var stack = player.getMainHandStack();
-            var mapId = stack.get(DataComponentTypes.MAP_ID);
-            if (player.getWorld().getMapState(mapId) == state) {
+    private HeightGetter getCreationHeight(Entity entity, MapItemSavedData state) {
+        if (entity instanceof Player player) {
+            var stack = player.getMainHandItem();
+            var mapId = stack.get(DataComponents.MAP_ID);
+            if (player.level().getMapData(mapId) == state) {
                 var val = stack.get(NetherMap.MAP_HEIGHT);
                 return val != null ? new HeightGetter.Fixed(val) : HeightGetter.PASSTHROUGH;
             }
-            stack = player.getOffHandStack();
-            mapId = stack.get(DataComponentTypes.MAP_ID);
-            if (player.getWorld().getMapState(mapId) == state) {
+            stack = player.getOffhandItem();
+            mapId = stack.get(DataComponents.MAP_ID);
+            if (player.level().getMapData(mapId) == state) {
                 var val = stack.get(NetherMap.MAP_HEIGHT);
                 return val != null ? new HeightGetter.Fixed(val) : HeightGetter.PASSTHROUGH;
             }
